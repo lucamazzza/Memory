@@ -45,7 +45,7 @@ public class Card {
     public Card(char symbol, int points) {
         // TODO: Check integrity of data
         this.symbol = symbol;
-        this.points = 0;
+        this.points = points;
         this.flipped = false;
     }
 
@@ -68,7 +68,7 @@ public class Card {
         if (card == null) {
             return false;
         }
-        return this.symbol == card.symbol && this.points == card.points;
+        return this.symbol == card.symbol;
     }
 
     /**
@@ -97,11 +97,26 @@ public class Card {
     }
 
     /**
+     * Flip the card to the specified side.
+     */
+    public void flip(boolean state) {
+        this.flipped = state;
+    }
+
+    /**
      * Check if the card is flipped.
      * 
      * @return true if the card is flipped
      */
     public boolean isFlipped() {
         return this.flipped;
+    }
+
+    public void print() {
+        if (flipped) {
+            System.out.print(this.toString());
+        } else {
+            System.out.print("!");
+        }
     }
 }

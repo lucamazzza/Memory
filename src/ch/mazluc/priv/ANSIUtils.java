@@ -25,7 +25,7 @@ package ch.mazluc.priv;
  */
 /**
  * <h1>
- * ANSIUtility
+ * ANSIUtils
  * </h1>
  * 
  * <p>
@@ -34,25 +34,29 @@ package ch.mazluc.priv;
  * and resetting the output format. Color codes are defined as constants and
  * color codes with 16 or 256 bit format are not supported.
  * 
+ * <ul>
+ * <li>Find out more at https://en.wikipedia.org/wiki/ANSI_escape_code;
+ * <li>GitHub Repo: https://github.com/lucamazzza/ANSIUtility;
+ * </ul>
+ * 
  * <p>
  * Usage:
  * 
  * <pre>
  * {@code
- * ANSIUtility.clearScreen(); // clear the screen
- * ANSIUtility.moveTo(10, 10); // move the cursor to row 10 and column 10
- * ANSIUtility.setForegroundColor(ANSIUtility.RED); // set the foreground color to red
- * ANSIUtility.setBackgroundColor(ANSIUtility.YELLOW); // set the background color to yellow
+ * ANSIUtils.clearScreen(); // clear the screen
+ * ANSIUtils.moveTo(10, 10); // move the cursor to row 10 and column 10
+ * ANSIUtils.setForegroundColor(ANSIUtils.RED); // set the foreground color to red
+ * ANSIUtils.setBackgroundColor(ANSIUtils.YELLOW); // set the background color to yellow
  * System.out.println("Hello, World!"); // print "Hello, World!"
- * ANSIUtility.reset(); // reset the output format
+ * ANSIUtils.reset(); // reset the output format
  * }
  * </pre>
- *
+ * 
  * @author Luca Mazza
  * @version 1.0
- * @since 1.0
  */
-public class ANSIUtility {
+public class ANSIUtils {
 
     /**
      * ANSI black color code

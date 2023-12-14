@@ -60,7 +60,7 @@ public class Coordinate {
      * @return the true x coordinate
      */
     public int trueX() {
-        return Math.max(this.x - 1, this.x);
+        return this.x - 1;
     }
 
     /**
@@ -69,6 +69,6 @@ public class Coordinate {
      * @return the true y coordinate
      */
     public int trueY() {
-        return Math.max(this.y - 1, this.y);
+        return this.y - 1;
     }
 }

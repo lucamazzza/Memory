@@ -1,5 +1,8 @@
 package ch.mazluc.priv;
 
+import java.util.Random;
+import java.util.regex.Pattern;
+
 /**
  * <h1>
  * Grid
@@ -34,6 +37,12 @@ public class Grid {
     private Card[][] grid;
 
     /**
+     * The random number generator.
+     * It is used to generate random cards.
+     */
+    Random random = new Random();
+
+    /**
      * Constructor.
      * Must be called with the number of rows and columns.
      * 
@@ -45,13 +54,29 @@ public class Grid {
     }
 
     /**
+     * Check if the grid is empty.
+     * 
+     * @return true if the grid is empty, false otherwise
+     */
+    public boolean isEmpty() {
+        for (int i = 1; i <= getRowSize(); i++) {
+            for (int j = 1; j <= getColSize(); j++) {
+                if (this.getCard(new Coordinate(i, j)) != null) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    /**
      * Get the card at the specified coordinate.
      * 
      * @param coord the coordinate
      * @return the card
      */
     public Card getCard(Coordinate coord) {
-        return this.grid[coord.trueY()][coord.trueX()];
+        return this.grid[coord.trueX()][coord.trueY()];
     }
 
     /**
@@ -64,7 +89,7 @@ public class Grid {
      * @param card  the card
      */
     public void setCard(Coordinate coord, Card card) {
-        this.grid[coord.trueY()][coord.trueX()] = card;
+        this.grid[coord.trueX()][coord.trueY()] = card;
     }
 
     /**
@@ -86,9 +111,167 @@ public class Grid {
     }
 
     /**
+     * Pop the card from the grid.
+     * Ignore the card if it is not in the grid and if it is null.
+     * 
+     * @param card the card
+     */
+    public void popCard(Card card) {
+        for (int i = 1; i <= getRowSize(); i++) {
+            for (int j = 1; j <= getColSize(); j++) {
+                if (this.getCard(new Coordinate(i, j)) != null && this.getCard(new Coordinate(i, j)).equals(card)) {
+                    this.setCard(new Coordinate(i, j), null);
+                }
+            }
+        }
+    }
+
+    /**
+     * Flip all the cards in the grid on the backside.
+     */
+    public void flipAllCards() {
+        for (int i = 1; i <= getRowSize(); i++) {
+            for (int j = 1; j <= getColSize(); j++) {
+                if (this.getCard(new Coordinate(i, j)) != null) {
+                    this.getCard(new Coordinate(i, j)).flip(false);
+                }
+            }
+        }
+    }
+
+    /**
+     * Push a card in a random free cell.
+     * 
+     * @param card the card
+     */
+    public void pushInRandomFreeCell(Card card) {
+        Coordinate coord;
+        do {
+            coord = new Coordinate(this.random.nextInt(getRowSize()) + 1, this.random.nextInt(getColSize()) + 1);
+        } while (this.getCard(coord) != null);
+        this.setCard(coord, card);
+    }
+
+    /**
+     * Check if the grid contains a card.
+     * 
+     * @param card the card
+     * @return true if the grid contains the card, false otherwise
+     */
+    public boolean containsCard(char card) {
+        for (int i = 1; i <= getRowSize(); i++) {
+            for (int j = 1; j <= getColSize(); j++) {
+                boolean isSet = this.getCard(new Coordinate(i, j)) != null;
+                if (isSet && this.getCard(new Coordinate(i, j)).getSymbol() == card) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    /**
+     * Check if the character is displayable.
+     * 
+     * @param ch the character
+     * @return true if the character is displayable, false otherwise
+     */
+    public static boolean isCharacterDisplayable(char ch) {
+        String regex = "\\P{Print}";
+        String str = Character.toString(ch);
+        return !Pattern.matches(regex, str);
+    }
+
+    /**
+     * Get a random unique character.
+     * 
+     * @return the random unique character
+     */
+    public char getRandomUniqueChar() {
+        char randomChar;
+        do {
+            randomChar = (char) (random.nextInt(256));
+        } while (!isCharacterDisplayable(randomChar) || this.containsCard(randomChar) || randomChar == '!');
+        return randomChar;
+    }
+
+    /**
      * Fill the grid with random cards.
      */
     public void fill() {
-        // TODO: Fill the grid with random cards
+        for (int i = 0; i < (this.getRowSize() * this.getColSize()); i += 2) {
+            char randomChar = getRandomUniqueChar();
+            int score = this.random.nextInt(10);
+            Card card1 = new Card(randomChar, score);
+            Card card2 = new Card(randomChar, score);
+
+            this.pushInRandomFreeCell(card1);
+            this.pushInRandomFreeCell(card2);
+        }
+    }
+
+    /**
+     * Print the grid.
+     */
+    public void print() {
+        // Print indices for columns
+        System.out.print("    "); // initial space for row indices
+        for (int i = 1; i <= grid[0].length; i++) {
+            System.out.printf(" %2d ", i);
+        }
+        System.out.println();
+        for (int i = 0; i < grid.length; i++) {
+            // Print top border for row
+            System.out.print("    "); // initial space for row indices
+            for (int j = 0; j < grid[i].length * 4 + 1; j++) {
+                if (i == 0 && j == 0) {
+                    System.out.print("┌");
+                } else if (i == 0 && j < grid[i].length * 4 && j % 4 == 0) {
+                    System.out.print("┬");
+                } else if (i == 0 && j == grid[i].length * 4) {
+                    System.out.print("┐");
+                } else if (i < grid.length && j == 0) {
+                    System.out.print("├");
+                } else if (i < grid.length && j == grid[i].length * 4) {
+                    System.out.print("┤");
+                } else if (i < grid.length && j < grid[i].length * 4 && j % 4 == 0) {
+                    System.out.print("┼");
+                } else {
+                    System.out.print("─");
+                }
+            }
+            System.out.println();
+            System.out.printf("  %2d|", i + 1);
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] != null) {
+                    System.out.print(" ");
+                    if (grid[i][j].isFlipped()) {
+                        ANSIUtils.setForegroundColor(ANSIUtils.BRIGHT_YELLOW);
+                        ANSIUtils.setBold();
+                    }
+                    grid[i][j].print();
+                    ANSIUtils.reset();
+                    System.out.print(" ");
+                } else {
+                    System.out.print("   ");
+                }
+                System.out.print("|");
+            }
+            System.out.println();
+        }
+        // Print bottom border for last row
+        System.out.print("    "); // initial space for row indices
+        for (int i = 0; i < grid[0].length * 4 + 1; i++) {
+            if (i == 0) {
+                System.out.print("└");
+            } else if (i < grid[0].length * 4 && i % 4 == 0) {
+                System.out.print("┴");
+            } else if (i == grid[0].length * 4) {
+                System.out.print("┘");
+            } else {
+                System.out.print("─");
+            }
+        }
+        System.out.println();
     }
 }
