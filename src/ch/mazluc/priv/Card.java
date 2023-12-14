@@ -68,7 +68,7 @@ public class Card {
         if (card == null) {
             return false;
         }
-        return this.symbol == card.symbol;
+        return this.symbol == card.symbol && !(this == card);
     }
 
     /**

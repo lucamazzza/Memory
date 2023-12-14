@@ -74,9 +74,12 @@ public class Game {
         this.console.readEnterToContinue();
     }
 
-    public Card takeGuess() {
+    public Card takeGuess(int player) {
         Coordinate coord;
         do {
+            ANSIUtils.clearScreen();
+            this.printUI(player);
+            System.out.println(players[player].getName() + " guess: ");
             coord = this.console.readValidCoordinate(this.grid.getRowSize(), this.grid.getColSize());
         } while (!this.console.isCoordinateInBounds(coord, grid) || this.grid.getCard(coord) == null);
         this.grid.getCard(coord).flip(true);
@@ -87,10 +90,10 @@ public class Game {
         int currentPlayer = 0;
         while (!this.grid.isEmpty()) {
             this.printUI(currentPlayer);
-            Card guess1 = this.takeGuess();
+            Card guess1 = this.takeGuess(currentPlayer);
             ANSIUtils.clearScreen();
             this.printUI(currentPlayer);
-            Card guess2 = this.takeGuess();
+            Card guess2 = this.takeGuess(currentPlayer);
             ANSIUtils.clearScreen();
             this.printUI(currentPlayer);
             if (guess1.equals(guess2)) {
@@ -98,6 +101,7 @@ public class Game {
                 Thread.sleep(2000);
                 players[currentPlayer].incrementScore(guess1.getPoints());
                 this.grid.popCard(guess1);
+                this.grid.popCard(guess2);
             } else {
                 System.out.println("WRONG!");
                 Thread.sleep(2000);

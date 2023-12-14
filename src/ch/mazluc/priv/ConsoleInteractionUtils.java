@@ -142,8 +142,8 @@ public class ConsoleInteractionUtils {
                 """.formatted(Constant.MAX_CELLS);
         System.out.println(message);
         do {
-            height = this.readIntInRange(1, Constant.MAX_CELLS);
-            width = this.readIntInRange(1, Constant.MAX_CELLS);
+            height = this.readIntInRange(0, Constant.MAX_CELLS);
+            width = this.readIntInRange(0, Constant.MAX_CELLS);
             validGridSize = isValidGridSize(height, width);
         } while (!validGridSize);
         return new int[] { height, width };
@@ -180,9 +180,9 @@ public class ConsoleInteractionUtils {
 
         System.out.println(message);
         System.out.println("Insert row: ");
-        int x = this.readIntInRange(1, gridHeight);
+        int x = this.readIntInRange(0, gridHeight);
         System.out.println("Insert column: ");
-        int y = this.readIntInRange(1, gridWidth);
+        int y = this.readIntInRange(0, gridWidth);
         return new Coordinate(x, y);
     }
 
