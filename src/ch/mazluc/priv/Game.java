@@ -37,14 +37,17 @@ public class Game {
      * Fills the grid with cards.
      */
     public void initialize() {
+        ANSIUtils.setBold();
         System.out.println("GAME SETTINGS: ");
+        ANSIUtils.reset();
         // INIT PLAYER LIST
-        int playerCount = this.console.readIntInRange(2, 6);
+        int playerCount = this.console.readIntInRange(Constant.MIN_PLAYERS, Constant.MAX_PLAYERS);
         this.console.clearScanner();
         this.players = new Player[playerCount];
         // INIT PLAYER NAMES
         for (int i = 0; i < this.players.length; i++) {
-            String name = this.console.readNonBlankOrEmptyString("Insert player #" + (i + 1) + " name");
+            String name = this.console.readStringWithMinLenght("Insert player #" + (i + 1) + " name",
+                    Constant.MIN_PLAYER_NAME_LENGTH);
             this.players[i] = new Player(name);
         }
         // INIT GRID
@@ -61,31 +64,54 @@ public class Game {
      */
     private void printUI(int currentPlayer) {
         ANSIUtils.clearScreen();
+        ANSIUtils.setBackgroundColor(players[currentPlayer].getColor());
         System.out
                 .println(players[currentPlayer].getName() + "'s turn (" + players[currentPlayer].getScore() + ")");
+        ANSIUtils.reset();
         this.grid.print();
     }
 
     private void printLeaderboard() {
+        ANSIUtils.setBold();
         System.out.println("LEADERBOARD: ");
+        ANSIUtils.reset();
         for (int i = 0; i < players.length; i++) {
-            System.out.println(players[i].getName() + " - " + players[i].getScore());
+            ANSIUtils.setBackgroundColor(players[i].getColor());
+            System.out.println(players[i].getName() + ": \t " + players[i].getScore());
+            ANSIUtils.reset();
         }
         this.console.readEnterToContinue();
     }
 
     public Card takeGuess(int player) {
         Coordinate coord;
+        boolean inBounds = false;
         do {
             ANSIUtils.clearScreen();
             this.printUI(player);
             System.out.println(players[player].getName() + " guess: ");
             coord = this.console.readValidCoordinate(this.grid.getRowSize(), this.grid.getColSize());
-        } while (!this.console.isCoordinateInBounds(coord, grid) || this.grid.getCard(coord) == null);
+            inBounds = this.console.isCoordinateInBounds(coord, this.grid);
+        } while (!inBounds || this.grid.getCard(coord) == null);
         this.grid.getCard(coord).flip(true);
         return this.grid.getCard(coord);
     }
 
+    /**
+     * Start the game.
+     * 
+     * <p>
+     * Game cycle:
+     * <ul>
+     * <li>take 2 guesses
+     * <li>if the guesses are the same, the player gets 2 points and plays again
+     * <li>if the guesses are different, the player gets 0 points and the next
+     * player plays
+     * </ul>
+     * When the grid is empty the game is over
+     * 
+     * @throws InterruptedException when the game is interrupted
+     */
     public void start() throws InterruptedException {
         int currentPlayer = 0;
         while (!this.grid.isEmpty()) {
@@ -121,7 +147,4 @@ public class Game {
 
     // + startScreen() -> void
     // + endScreen() -> void
-    // + takeGuesses(coord1: Coordinate, coord2: Coordinate) -> void
-    // + nextTurn() -> void
-    // + start() -> void
 }

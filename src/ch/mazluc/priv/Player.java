@@ -1,5 +1,7 @@
 package ch.mazluc.priv;
 
+import java.util.Random;
+
 /**
  * <h1>
  * Player
@@ -31,6 +33,11 @@ public class Player {
     private boolean dead;
 
     /**
+     * The color of the player in the UI.
+     */
+    private int color;
+
+    /**
      * Constructor.
      * Must provide a name for each player
      * and the name must be at least 3 characters long
@@ -45,8 +52,18 @@ public class Player {
             throw new IllegalArgumentException("Player name must be at least 3 characters long");
         }
         this.name = name;
+        this.color = randomColor();
         this.score = 0;
         this.dead = false;
+    }
+
+    private int randomColor() {
+        Random random = new Random();
+        return random.nextInt(7) + 30;
+    }
+
+    public int getColor() {
+        return this.color;
     }
 
     /**

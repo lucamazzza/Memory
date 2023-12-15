@@ -110,6 +110,23 @@ public class ConsoleInteractionUtils {
         return value;
     }
 
+    public String readStringWithMinLenght(String msg, int minLength) {
+        String value = "";
+        boolean correctInput = false;
+        while (!correctInput) {
+            System.out.print(msg + ": ");
+            value = this.in.nextLine();
+            if (value.length() < minLength && !value.isBlank()) {
+                ANSIUtils.setForegroundColor(ANSIUtils.RED);
+                System.out.println("Error: string is shorter than " + minLength + " characters.");
+                ANSIUtils.reset();
+            } else {
+                correctInput = true;
+            }
+        }
+        return value;
+    }
+
     /**
      * Check if the grid size is valid.
      * 
@@ -142,8 +159,8 @@ public class ConsoleInteractionUtils {
                 """.formatted(Constant.MAX_CELLS);
         System.out.println(message);
         do {
-            height = this.readIntInRange(0, Constant.MAX_CELLS);
-            width = this.readIntInRange(0, Constant.MAX_CELLS);
+            height = this.readIntInRange(1, Constant.MAX_CELLS);
+            width = this.readIntInRange(1, Constant.MAX_CELLS);
             validGridSize = isValidGridSize(height, width);
         } while (!validGridSize);
         return new int[] { height, width };
@@ -157,8 +174,8 @@ public class ConsoleInteractionUtils {
      * @return true if the coordinate is in the bounds of the grid, false otherwise
      */
     public boolean isCoordinateInBounds(Coordinate coord, Grid grid) {
-        return coord.trueX() >= 0 && coord.trueX() < grid.getRowSize() && coord.trueX() >= 0
-                && coord.trueX() < grid.getColSize();
+        return coord.trueX() >= 0 && coord.trueX() < grid.getRowSize() && coord.trueY() >= 0
+                && coord.trueY() < grid.getColSize();
     }
 
     /**
@@ -180,9 +197,9 @@ public class ConsoleInteractionUtils {
 
         System.out.println(message);
         System.out.println("Insert row: ");
-        int x = this.readIntInRange(0, gridHeight);
+        int x = this.readIntInRange(1, gridHeight);
         System.out.println("Insert column: ");
-        int y = this.readIntInRange(0, gridWidth);
+        int y = this.readIntInRange(1, gridWidth);
         return new Coordinate(x, y);
     }
 
