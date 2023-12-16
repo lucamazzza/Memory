@@ -110,15 +110,16 @@ public class ConsoleInteractionUtils {
         return value;
     }
 
-    public String readStringWithMinLenght(String msg, int minLength) {
+    public String readStringWithMinMaxLength(String msg, int minLength, int maxLength) {
         String value = "";
         boolean correctInput = false;
         while (!correctInput) {
             System.out.print(msg + ": ");
             value = this.in.nextLine();
-            if (value.length() < minLength && !value.isBlank()) {
+            if ((value.length() < minLength || value.length() > maxLength) && !value.isBlank()) {
                 ANSIUtils.setForegroundColor(ANSIUtils.RED);
-                System.out.println("Error: string is shorter than " + minLength + " characters.");
+                System.out.println("Error: string is shorter than " + minLength + " characters or longer than "
+                        + maxLength + " characters.");
                 ANSIUtils.reset();
             } else {
                 correctInput = true;

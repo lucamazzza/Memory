@@ -23,4 +23,6 @@ public class Constant {
     public static final int MAX_PLAYERS = 6;
 
     public static final int MIN_PLAYER_NAME_LENGTH = 3;
+
+    public static final int MAX_PLAYER_NAME_LENGTH = 15;
 }

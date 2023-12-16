@@ -201,7 +201,7 @@ public class Grid {
     public void fill() {
         for (int i = 0; i < (this.getRowSize() * this.getColSize()); i += 2) {
             char randomChar = getRandomUniqueChar();
-            int score = this.random.nextInt(10);
+            int score = this.random.nextInt(9) + 1;
             Card card1 = new Card(randomChar, score);
             Card card2 = new Card(randomChar, score);
 

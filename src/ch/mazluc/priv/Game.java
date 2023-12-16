@@ -46,8 +46,8 @@ public class Game {
         this.players = new Player[playerCount];
         // INIT PLAYER NAMES
         for (int i = 0; i < this.players.length; i++) {
-            String name = this.console.readStringWithMinLenght("Insert player #" + (i + 1) + " name",
-                    Constant.MIN_PLAYER_NAME_LENGTH);
+            String name = this.console.readStringWithMinMaxLength("Insert player #" + (i + 1) + " name",
+                    Constant.MIN_PLAYER_NAME_LENGTH, Constant.MAX_PLAYER_NAME_LENGTH);
             this.players[i] = new Player(name);
         }
         // INIT GRID
@@ -71,28 +71,37 @@ public class Game {
         this.grid.print();
     }
 
+    /**
+     * Print the leaderboard.
+     */
     private void printLeaderboard() {
         ANSIUtils.setBold();
         System.out.println("LEADERBOARD: ");
         ANSIUtils.reset();
         for (int i = 0; i < players.length; i++) {
             ANSIUtils.setBackgroundColor(players[i].getColor());
-            System.out.println(players[i].getName() + ": \t " + players[i].getScore());
+            System.out.printf("%-15s %2d\n", players[i].getName(), players[i].getScore());
             ANSIUtils.reset();
         }
         this.console.readEnterToContinue();
     }
 
+    /**
+     * Take a guess.
+     * Asks the user for a coordinate, which is checked if it is in the bounds and
+     * if it is not null.
+     * 
+     * @param player the index of the player
+     * @return the card
+     */
     public Card takeGuess(int player) {
         Coordinate coord;
-        boolean inBounds = false;
         do {
             ANSIUtils.clearScreen();
             this.printUI(player);
             System.out.println(players[player].getName() + " guess: ");
             coord = this.console.readValidCoordinate(this.grid.getRowSize(), this.grid.getColSize());
-            inBounds = this.console.isCoordinateInBounds(coord, this.grid);
-        } while (!inBounds || this.grid.getCard(coord) == null);
+        } while (!this.console.isCoordinateInBounds(coord, this.grid) || this.grid.getCard(coord) == null);
         this.grid.getCard(coord).flip(true);
         return this.grid.getCard(coord);
     }
@@ -141,6 +150,10 @@ public class Game {
         this.printLeaderboard();
     }
 
+    /**
+     * Destroy the game.
+     * Closes the scanner.
+     */
     public void destroy() {
         this.console.closeScanner();
     }

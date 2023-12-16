@@ -49,7 +49,7 @@ public class Player {
         if (name.length() < 3 || name.length() > 15) {
             // TODO: Manage case where name is too short
             // THIS IS TMP
-            throw new IllegalArgumentException("Player name must be at least 3 characters long");
+            throw new IllegalArgumentException("Player name must be at least 3 and 15characters long");
         }
         this.name = name;
         this.color = randomColor();
@@ -57,11 +57,21 @@ public class Player {
         this.dead = false;
     }
 
+    /**
+     * Generate a random color number.
+     * 
+     * @return the color
+     */
     private int randomColor() {
         Random random = new Random();
-        return random.nextInt(7) + 30;
+        return random.nextInt(7) + 31;
     }
 
+    /**
+     * Get the color of the player in the UI.
+     * 
+     * @return the color
+     */
     public int getColor() {
         return this.color;
     }
