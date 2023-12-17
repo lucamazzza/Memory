@@ -1,4 +1,4 @@
-package ch.mazluc.priv;
+package ch.mazluc.game;
 
 /*
  * MIT License

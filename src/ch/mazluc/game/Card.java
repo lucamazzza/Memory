@@ -1,4 +1,4 @@
-package ch.mazluc.priv;
+package ch.mazluc.game;
 
 /**
  * <h1>
@@ -7,6 +7,8 @@ package ch.mazluc.priv;
  * 
  * <p>
  * A card in a card game.
+ * 
+ * <p>
  * Every card has a symbol, an amount of points and a state.
  * The state represent whether the card is flipped (true),
  * so it shows its value, or not (false).
@@ -27,6 +29,18 @@ public class Card {
     private int points;
 
     /**
+     * The case of the bomb card.
+     * Eliminates the player that flipped it.
+     */
+    private boolean bomb;
+
+    /**
+     * The case of the jolly card.
+     * Adds extra points to the player that flipped it.
+     */
+    private boolean jolly;
+
+    /**
      * The state of the card.
      */
     private boolean flipped;
@@ -37,16 +51,44 @@ public class Card {
      * State is set to false by default given that
      * a card is flipped (the symbol is hidden) at
      * the start of every game.
-     * TODO: Check integrity of data
      * 
      * @param symbol the symbol of the card
      * @param points the amount of points
      */
     public Card(char symbol, int points) {
-        // TODO: Check integrity of data
+        if (points < 0) {
+            // TODO: MANAGE THE CASE IN WHICH THE POINTS ARE NEGATIVE
+            // THIS IS TMP
+            throw new IllegalArgumentException("Points must be positive");
+        }
         this.symbol = symbol;
         this.points = points;
         this.flipped = false;
+    }
+
+    /**
+     * Constructor.
+     * Case in which the card has to be a bomb.
+     * 
+     * @param symbol the symbol of the card
+     * @param bomb   true if the card is a bomb
+     */
+    public Card(char symbol, boolean bomb) {
+        this(symbol, 0);
+        this.bomb = bomb;
+    }
+
+    /**
+     * Constructor.
+     * Case in which the card has to be a jolly.
+     * 
+     * @param symbol the symbol of the card
+     * @param points the amount of points
+     * @param jolly  true if the card is a jolly
+     */
+    public Card(char symbol, int points, boolean jolly) {
+        this(symbol, points);
+        this.jolly = jolly;
     }
 
     /**
@@ -67,6 +109,12 @@ public class Card {
     public boolean equals(Card card) {
         if (card == null) {
             return false;
+        }
+        if (this.bomb && card.bomb) {
+            return true;
+        }
+        if (this.jolly && card.jolly) {
+            return true;
         }
         return this.symbol == card.symbol && !(this == card);
     }
@@ -112,6 +160,27 @@ public class Card {
         return this.flipped;
     }
 
+    /**
+     * Check if the card is a bomb.
+     * 
+     * @return true if the card is a bomb
+     */
+    public boolean isBomb() {
+        return this.bomb;
+    }
+
+    /**
+     * Check if the card is a jolly.
+     * 
+     * @return true if the card is a jolly
+     */
+    public boolean isJolly() {
+        return this.jolly;
+    }
+
+    /**
+     * Print the card.
+     */
     public void print() {
         if (flipped) {
             System.out.print(this.toString());

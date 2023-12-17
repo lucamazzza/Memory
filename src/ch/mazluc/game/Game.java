@@ -1,9 +1,21 @@
-package ch.mazluc.priv;
+package ch.mazluc.game;
 
 /**
  * <h1>
  * Game
  * </h1>
+ * 
+ * <p>
+ * Manages the game cycle.
+ * 
+ * <p>
+ * Every game has a list of players,
+ * a grid on which cards are layed upon
+ * and a console interaction utility that manages
+ * user input.
+ * 
+ * @author Luca Mazza
+ * @version 1.0
  */
 public class Game {
 
@@ -28,6 +40,25 @@ public class Game {
      */
     public Game() {
         this.console = new ConsoleInteractionUtils();
+    }
+
+    public void printStartScreen() {
+        String title = """
+
+
+
+                                    .--------.-----.--------.-----.----.--.--.
+                                    |        |  -__|        |  _  |   _|  |  |
+                                    |__|__|__|_____|__|__|__|_____|__| |___  |
+                                     Created by Luca Mazza © 2023      |_____|
+                """;
+        ANSIUtils.setForegroundColor(ANSIUtils.BLUE);
+        System.out.println(title);
+        ANSIUtils.setColor(ANSIUtils.BRIGHT_BLUE, ANSIUtils.BLACK);
+        System.out.print("\t\t\t");
+        this.console.readEnterToContinue();
+        ANSIUtils.reset();
+        ANSIUtils.clearScreen();
     }
 
     /**
@@ -122,26 +153,82 @@ public class Game {
      * @throws InterruptedException when the game is interrupted
      */
     public void start() throws InterruptedException {
-        int currentPlayer = 0;
+        int currentPlayer = -1;
+        boolean lastPlayerHasGuessed = false;
         while (!this.grid.isEmpty()) {
+            // PLAYERS ROTATION
+            if (!lastPlayerHasGuessed) {
+                do {
+                    currentPlayer = (currentPlayer + 1) % this.players.length;
+                } while (this.players[currentPlayer].isDead());
+            }
+
+            lastPlayerHasGuessed = false;
             this.printUI(currentPlayer);
             Card guess1 = this.takeGuess(currentPlayer);
             ANSIUtils.clearScreen();
             this.printUI(currentPlayer);
+
+            // CASE BOMB OR JOLLY FOR FIRST GUESS
+            if (guess1.isBomb()) {
+                players[currentPlayer].kill();
+                System.out.println("BOOM!");
+                this.grid.popCard(guess1);
+                Thread.sleep(2000);
+                this.console.clearScanner();
+                this.grid.flipAllCards();
+                continue;
+            }
+            if (guess1.isJolly()) {
+                players[currentPlayer].incrementScore(guess1.getPoints());
+                System.out.println("JOLLY!");
+                this.grid.popCard(guess1);
+                Thread.sleep(2000);
+                this.console.clearScanner();
+                this.grid.flipAllCards();
+                lastPlayerHasGuessed = true;
+                continue;
+            }
+
             Card guess2 = this.takeGuess(currentPlayer);
             ANSIUtils.clearScreen();
             this.printUI(currentPlayer);
+
+            // CASE BOMB OR JOLLY FOR SECOND GUESS
+            if (guess2.isBomb()) {
+                players[currentPlayer].kill();
+                System.out.println("BOOM!");
+                this.grid.popCard(guess2);
+                Thread.sleep(2000);
+                this.console.clearScanner();
+                this.grid.flipAllCards();
+                continue;
+            }
+            if (guess2.isJolly()) {
+                players[currentPlayer].incrementScore(guess2.getPoints());
+                System.out.println("JOLLY!");
+                this.grid.popCard(guess2);
+                Thread.sleep(2000);
+                this.console.clearScanner();
+                this.grid.flipAllCards();
+                lastPlayerHasGuessed = true;
+                continue;
+            }
+            this.printUI(currentPlayer);
+
+            // CASE MATCH OR WRONG
             if (guess1.equals(guess2)) {
                 System.out.println("MATCH!");
                 Thread.sleep(2000);
                 players[currentPlayer].incrementScore(guess1.getPoints());
                 this.grid.popCard(guess1);
                 this.grid.popCard(guess2);
+                lastPlayerHasGuessed = true;
             } else {
                 System.out.println("WRONG!");
                 Thread.sleep(2000);
-                currentPlayer = (currentPlayer + 1) % this.players.length;
             }
+            // RESTORE GRID
             this.console.clearScanner();
             this.grid.flipAllCards();
         }
@@ -158,6 +245,4 @@ public class Game {
         this.console.closeScanner();
     }
 
-    // + startScreen() -> void
-    // + endScreen() -> void
 }

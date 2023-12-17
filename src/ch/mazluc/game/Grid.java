@@ -1,4 +1,4 @@
-package ch.mazluc.priv;
+package ch.mazluc.game;
 
 import java.util.Random;
 import java.util.regex.Pattern;
@@ -10,6 +10,8 @@ import java.util.regex.Pattern;
  *
  * <p>
  * A grid of cards.
+ * 
+ * <p>
  * It is implemented as a 2D array of cards.
  * 
  * <p>
@@ -199,15 +201,20 @@ public class Grid {
      * Fill the grid with random cards.
      */
     public void fill() {
-        for (int i = 0; i < (this.getRowSize() * this.getColSize()); i += 2) {
+        for (int i = 0; i < (this.getRowSize() * this.getColSize()) - 2; i += 2) {
             char randomChar = getRandomUniqueChar();
             int score = this.random.nextInt(9) + 1;
+
             Card card1 = new Card(randomChar, score);
             Card card2 = new Card(randomChar, score);
 
             this.pushInRandomFreeCell(card1);
             this.pushInRandomFreeCell(card2);
         }
+        Card bomb = new Card('ﬁ', true);
+        Card jolly = new Card('§', Constant.JOLLY_POINTS, true);
+        this.pushInRandomFreeCell(jolly);
+        this.pushInRandomFreeCell(bomb);
     }
 
     /**
@@ -246,7 +253,13 @@ public class Grid {
                 if (grid[i][j] != null) {
                     System.out.print(" ");
                     if (grid[i][j].isFlipped()) {
-                        ANSIUtils.setForegroundColor(ANSIUtils.BRIGHT_YELLOW);
+                        if (grid[i][j].isBomb()) {
+                            ANSIUtils.setForegroundColor(ANSIUtils.RED);
+                        } else if (grid[i][j].isJolly()) {
+                            ANSIUtils.setForegroundColor(ANSIUtils.GREEN);
+                        } else {
+                            ANSIUtils.setForegroundColor(ANSIUtils.BRIGHT_YELLOW);
+                        }
                         ANSIUtils.setBold();
                     }
                     grid[i][j].print();
@@ -261,7 +274,9 @@ public class Grid {
         }
         // Print bottom border for last row
         System.out.print("    "); // initial space for row indices
-        for (int i = 0; i < grid[0].length * 4 + 1; i++) {
+        for (
+
+                int i = 0; i < grid[0].length * 4 + 1; i++) {
             if (i == 0) {
                 System.out.print("└");
             } else if (i < grid[0].length * 4 && i % 4 == 0) {
