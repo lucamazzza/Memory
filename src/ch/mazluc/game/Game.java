@@ -54,7 +54,8 @@ public class Game {
                 """;
         ANSIUtils.setForegroundColor(ANSIUtils.BLUE);
         System.out.println(title);
-        ANSIUtils.setColor(ANSIUtils.BRIGHT_BLUE, ANSIUtils.BLACK);
+        ANSIUtils.reset();
+        ANSIUtils.setColor(ANSIUtils.BRIGHT_BLUE, ANSIUtils.WHITE);
         System.out.print("\t\t\t");
         this.console.readEnterToContinue();
         ANSIUtils.reset();
@@ -258,5 +259,4 @@ public class Game {
     public void destroy() {
         this.console.closeScanner();
     }
-
 }
