@@ -61,6 +61,19 @@ public class Game {
         ANSIUtils.clearScreen();
     }
 
+    private void sortPlayersByScore() {
+        Player[] players = this.players;
+        for (int i = 0; i < players.length - 1; i++) {
+            for (int j = 0; j < players.length - i - 1; j++) {
+                if (players[j].getScore() < players[j + 1].getScore()) {
+                    Player temp = players[j];
+                    players[j] = players[j + 1];
+                    players[j + 1] = temp;
+                }
+            }
+        }
+    }
+
     /**
      * Initializes the game.
      * Reads the game settings from the user.
@@ -106,6 +119,7 @@ public class Game {
      * Print the leaderboard.
      */
     private void printLeaderboard() {
+        sortPlayersByScore();
         ANSIUtils.setBold();
         System.out.println("LEADERBOARD: ");
         ANSIUtils.reset();

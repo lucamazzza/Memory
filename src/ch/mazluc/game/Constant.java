@@ -49,5 +49,5 @@ public class Constant {
     /**
      * The points for a jolly card.
      */
-    public static final int JOLLY_POINTS = 1000;
+    public static final int JOLLY_POINTS = 20;
 }

@@ -56,7 +56,7 @@ public class ConsoleInteractionUtils {
         while (!this.in.hasNextInt()) {
             this.in.nextLine();
             ANSIUtils.setForegroundColor(ANSIUtils.RED);
-            System.out.print("Error, must be an integer");
+            System.out.println("Error, must be an integer");
             ANSIUtils.reset();
             System.out.print(msg + ": ");
         }
@@ -74,12 +74,12 @@ public class ConsoleInteractionUtils {
      * @return the integer
      */
     public int readIntInRange(int min, int max) {
-        int value = this.readInt("Insert a number between " + min + " and " + max);
+        int value = this.readInt("Insert a number [" + min + "-" + max + "]");
         while (value < min || value > max) {
             ANSIUtils.setForegroundColor(ANSIUtils.RED);
-            System.out.println("Your number is outside the range");
+            System.out.println("Number out of range");
             ANSIUtils.reset();
-            value = this.readInt("Insert a number between " + min + " and " + max);
+            value = this.readInt("Insert a number [" + min + "-" + max + "]");
         }
         return value;
     }
