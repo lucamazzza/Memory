@@ -46,12 +46,12 @@ public class Player {
      * 
      * @param name
      */
-    public Player(String name) {
+    public Player(String name, int color) {
         if (name.length() < 3 || name.length() > 15) {
             name = generateName();
         }
         this.name = name;
-        this.color = randomColor();
+        this.color = color;
         this.score = 0;
         this.dead = false;
     }
@@ -67,16 +67,6 @@ public class Player {
      */
     public static String generateName() {
         return UUID.randomUUID().toString().substring(0, 7);
-    }
-
-    /**
-     * Generate a random color number.
-     * 
-     * @return the color
-     */
-    private int randomColor() {
-        Random random = new Random();
-        return random.nextInt(7) + 31;
     }
 
     /**
