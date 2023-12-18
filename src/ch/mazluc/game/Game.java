@@ -1,5 +1,7 @@
 package ch.mazluc.game;
 
+import java.util.Random;
+
 /**
  * <h1>
  * Game
@@ -33,6 +35,11 @@ public class Game {
      * The console interaction util.
      */
     private ConsoleInteractionUtils console;
+
+    /**
+     * The random number generator.
+     */
+    private static final Random random = new Random();
 
     /**
      * Constructor.
@@ -85,6 +92,15 @@ public class Game {
     }
 
     /**
+     * Generate a random color number.
+     * 
+     * @return the color
+     */
+    private int randomColor() {
+        return random.nextInt(7) + 31;
+    }
+
+    /**
      * Initializes the game.
      * Reads the game settings from the user.
      * Initializes the players and the grid.
@@ -92,6 +108,7 @@ public class Game {
      */
     public void initialize() {
         ANSIUtils.setBold();
+        ANSIUtils.setForegroundColor(ANSIUtils.BLUE);
         System.out.println("GAME SETTINGS: ");
         ANSIUtils.reset();
         // INIT PLAYER LIST
@@ -100,9 +117,9 @@ public class Game {
         this.players = new Player[playerCount];
         // INIT PLAYER NAMES
         for (int i = 0; i < this.players.length; i++) {
-            String name = this.console.readStringWithMinMaxLength("Insert player #" + (i + 1) + " name",
+            String name = this.console.readStringWithMinMaxLength("Insert player #" + (i + 1) + " name [↵ for random]",
                     Constant.MIN_PLAYER_NAME_LENGTH, Constant.MAX_PLAYER_NAME_LENGTH);
-            this.players[i] = new Player(name);
+            this.players[i] = new Player(name, randomColor());
         }
         // INIT GRID
         int[] gridSize = this.console.readValidGridSize();
@@ -131,6 +148,7 @@ public class Game {
     private void printLeaderboard() {
         sortPlayersByScore();
         ANSIUtils.setBold();
+        ANSIUtils.setForegroundColor(ANSIUtils.BLUE);
         System.out.println("LEADERBOARD: ");
         ANSIUtils.reset();
         for (int i = 0; i < players.length; i++) {
