@@ -57,9 +57,7 @@ public class Card {
      */
     public Card(char symbol, int points) {
         if (points < 0) {
-            // TODO: MANAGE THE CASE IN WHICH THE POINTS ARE NEGATIVE
-            // THIS IS TMP
-            throw new IllegalArgumentException("Points must be positive");
+            points = 1;
         }
         this.symbol = symbol;
         this.points = points;

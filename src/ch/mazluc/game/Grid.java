@@ -42,7 +42,7 @@ public class Grid {
      * The random number generator.
      * It is used to generate random cards.
      */
-    Random random = new Random();
+    private static final Random random = new Random();
 
     /**
      * Constructor.
@@ -149,7 +149,7 @@ public class Grid {
     public void pushInRandomFreeCell(Card card) {
         Coordinate coord;
         do {
-            coord = new Coordinate(this.random.nextInt(getRowSize()) + 1, this.random.nextInt(getColSize()) + 1);
+            coord = new Coordinate(random.nextInt(getRowSize()) + 1, random.nextInt(getColSize()) + 1);
         } while (this.getCard(coord) != null);
         this.setCard(coord, card);
     }
@@ -203,7 +203,7 @@ public class Grid {
     public void fill() {
         for (int i = 0; i < (this.getRowSize() * this.getColSize()) - 2; i += 2) {
             char randomChar = getRandomUniqueChar();
-            int score = this.random.nextInt(9) + 1;
+            int score = random.nextInt(9) + 1;
 
             Card card1 = new Card(randomChar, score);
             Card card2 = new Card(randomChar, score);

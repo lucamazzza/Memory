@@ -18,9 +18,9 @@ import java.util.Scanner;
  * <pre>
  * {@code
  * ConsoleInteractionUtils utils = new ConsoleInteractionUtils();
- * int value = utils.readInt();
- * String value = utils.readNonBlankOrEmptyString();
- * int valueInRange = utils.readIntInRange(1, 10);
+ * int value = utils.readInt(); // read an integer without checking a range
+ * String value = utils.readNonBlankOrEmptyString(); // read a non-blank or empty string value
+ * int valueInRange = utils.readIntInRange(1, 10); // read an integer in the range
  * }
  * </pre>
  * 
@@ -98,7 +98,7 @@ public class ConsoleInteractionUtils {
         boolean correctInput = false;
         while (!correctInput) {
             System.out.print(msg + ": ");
-            value = this.in.nextLine();
+            value = this.in.nextLine().strip().trim();
             if (value.isBlank() || value.isEmpty()) {
                 ANSIUtils.setForegroundColor(ANSIUtils.RED);
                 System.out.println("Error: string is empty or contains only white spaces.");
@@ -115,7 +115,7 @@ public class ConsoleInteractionUtils {
         boolean correctInput = false;
         while (!correctInput) {
             System.out.print(msg + ": ");
-            value = this.in.nextLine();
+            value = this.in.nextLine().strip().trim();
             if ((value.length() < minLength || value.length() > maxLength) && !value.isBlank()) {
                 ANSIUtils.setForegroundColor(ANSIUtils.RED);
                 System.out.println("Error: string is shorter than " + minLength + " characters or longer than "
@@ -160,8 +160,8 @@ public class ConsoleInteractionUtils {
                 """.formatted(Constant.MAX_CELLS);
         System.out.println(message);
         do {
-            height = this.readIntInRange(1, Constant.MAX_CELLS);
-            width = this.readIntInRange(1, Constant.MAX_CELLS);
+            height = this.readIntInRange(2, Constant.MAX_CELLS);
+            width = this.readIntInRange(2, Constant.MAX_CELLS);
             validGridSize = isValidGridSize(height, width);
         } while (!validGridSize);
         return new int[] { height, width };

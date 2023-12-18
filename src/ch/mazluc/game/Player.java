@@ -1,6 +1,7 @@
 package ch.mazluc.game;
 
 import java.util.Random;
+import java.util.UUID;
 
 /**
  * <h1>
@@ -47,14 +48,25 @@ public class Player {
      */
     public Player(String name) {
         if (name.length() < 3 || name.length() > 15) {
-            // TODO: Manage case where name is too short
-            // THIS IS TMP
-            throw new IllegalArgumentException("Player name must be at least 3 and 15characters long");
+            name = generateName();
         }
         this.name = name;
         this.color = randomColor();
         this.score = 0;
         this.dead = false;
+    }
+
+    /**
+     * Generate a random name.
+     * 
+     * <p>
+     * Not used, but available if needed to perform weak-check
+     * on names (if the name is too short or too long for example).
+     * 
+     * @return the name
+     */
+    public static String generateName() {
+        return UUID.randomUUID().toString().substring(0, 7);
     }
 
     /**
