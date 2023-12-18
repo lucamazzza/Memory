@@ -160,8 +160,8 @@ public class ConsoleInteractionUtils {
                 """.formatted(Constant.MAX_CELLS);
         System.out.println(message);
         do {
-            height = this.readIntInRange(2, Constant.MAX_CELLS);
-            width = this.readIntInRange(2, Constant.MAX_CELLS);
+            height = this.readIntInRange(2, Constant.MAX_CELLS / 2);
+            width = this.readIntInRange(2, Constant.MAX_CELLS / height);
             validGridSize = isValidGridSize(height, width);
         } while (!validGridSize);
         return new int[] { height, width };
