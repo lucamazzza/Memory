@@ -56,7 +56,7 @@ public class Card {
      * @param points the amount of points
      */
     public Card(char symbol, int points) {
-        if (points < 0) {
+        if (points < 1) {
             points = 1;
         }
         this.symbol = symbol;
