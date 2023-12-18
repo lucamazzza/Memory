@@ -42,6 +42,11 @@ public class Game {
         this.console = new ConsoleInteractionUtils();
     }
 
+    /**
+     * Print the start screen.
+     * Prints the title of the game.
+     * Reads the user input to continue.
+     */
     public void printStartScreen() {
         String title = """
 
@@ -62,6 +67,10 @@ public class Game {
         ANSIUtils.clearScreen();
     }
 
+    /**
+     * Sort the players by score.
+     * Sorts the players list in ascending order by score.
+     */
     private void sortPlayersByScore() {
         Player[] players = this.players;
         for (int i = 0; i < players.length - 1; i++) {
