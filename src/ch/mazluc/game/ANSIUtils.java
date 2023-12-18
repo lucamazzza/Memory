@@ -148,10 +148,19 @@ public class ANSIUtils {
      */
     public static final String CLS = "\u001B[2J";
 
+    /**
+     * ANSI backspace escape
+     */
     public static final String BS = "\u001B[1D";
 
+    /**
+     * ANSI delete escape
+     */
     public static final String DEL = "\u001B[1P";
 
+    /**
+     * ANSI bell escape
+     */
     public static final String BEL = "\u0007";
 
     /**
@@ -178,6 +187,15 @@ public class ANSIUtils {
      * ANSI reverse off escape
      */
     public static final String REVERSOFF = "\u001B[27m";
+
+    /**
+     * Private constructor to prevent instantiation,
+     * as the class is a utility class and its use is
+     * only static.
+     */
+    private ANSIUtils() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * Resets the output format to the default.
