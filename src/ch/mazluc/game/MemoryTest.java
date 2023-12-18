@@ -50,8 +50,9 @@ public class MemoryTest {
         try {
             game.start();
         } catch (InterruptedException e) {
-            System.out.println("Game interrupted");
+            Thread.currentThread().interrupt();
+        } finally {
+            game.destroy();
         }
-        game.destroy();
     }
 }

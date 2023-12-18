@@ -36,7 +36,7 @@ public class Grid {
      * defined in the class `Coordinate`, as they are
      * 0-based, instead of 1-based in `Coordinate`.
      */
-    private Card[][] grid;
+    private final Card[][] cards;
 
     /**
      * The random number generator.
@@ -52,7 +52,7 @@ public class Grid {
      * @param cols column size of the grid
      */
     public Grid(int rows, int cols) {
-        this.grid = new Card[rows][cols];
+        this.cards = new Card[rows][cols];
     }
 
     /**
@@ -78,7 +78,7 @@ public class Grid {
      * @return the card
      */
     public Card getCard(Coordinate coord) {
-        return this.grid[coord.trueX()][coord.trueY()];
+        return this.cards[coord.trueX()][coord.trueY()];
     }
 
     /**
@@ -91,7 +91,7 @@ public class Grid {
      * @param card  the card
      */
     public void setCard(Coordinate coord, Card card) {
-        this.grid[coord.trueX()][coord.trueY()] = card;
+        this.cards[coord.trueX()][coord.trueY()] = card;
     }
 
     /**
@@ -100,7 +100,7 @@ public class Grid {
      * @return the row size
      */
     public int getRowSize() {
-        return this.grid.length;
+        return this.cards.length;
     }
 
     /**
@@ -109,7 +109,7 @@ public class Grid {
      * @return the column size
      */
     public int getColSize() {
-        return this.grid[0].length;
+        return this.cards[0].length;
     }
 
     /**
@@ -223,25 +223,25 @@ public class Grid {
     public void print() {
         // Print indices for columns
         System.out.print("    "); // initial space for row indices
-        for (int i = 1; i <= grid[0].length; i++) {
+        for (int i = 1; i <= cards[0].length; i++) {
             System.out.printf(" %2d ", i);
         }
         System.out.println();
-        for (int i = 0; i < grid.length; i++) {
+        for (int i = 0; i < cards.length; i++) {
             // Print top border for row
             System.out.print("    "); // initial space for row indices
-            for (int j = 0; j < grid[i].length * 4 + 1; j++) {
+            for (int j = 0; j < cards[i].length * 4 + 1; j++) {
                 if (i == 0 && j == 0) {
                     System.out.print("┌");
-                } else if (i == 0 && j < grid[i].length * 4 && j % 4 == 0) {
+                } else if (i == 0 && j < cards[i].length * 4 && j % 4 == 0) {
                     System.out.print("┬");
-                } else if (i == 0 && j == grid[i].length * 4) {
+                } else if (i == 0 && j == cards[i].length * 4) {
                     System.out.print("┐");
-                } else if (i < grid.length && j == 0) {
+                } else if (j == 0) {
                     System.out.print("├");
-                } else if (i < grid.length && j == grid[i].length * 4) {
+                } else if (j == cards[i].length * 4) {
                     System.out.print("┤");
-                } else if (i < grid.length && j < grid[i].length * 4 && j % 4 == 0) {
+                } else if (j < cards[i].length * 4 && j % 4 == 0) {
                     System.out.print("┼");
                 } else {
                     System.out.print("─");
@@ -249,20 +249,20 @@ public class Grid {
             }
             System.out.println();
             System.out.printf("  %2d|", i + 1);
-            for (int j = 0; j < grid[i].length; j++) {
-                if (grid[i][j] != null) {
+            for (int j = 0; j < cards[i].length; j++) {
+                if (cards[i][j] != null) {
                     System.out.print(" ");
-                    if (grid[i][j].isFlipped()) {
-                        if (grid[i][j].isBomb()) {
+                    if (cards[i][j].isFlipped()) {
+                        if (cards[i][j].isBomb()) {
                             ANSIUtils.setForegroundColor(ANSIUtils.RED);
-                        } else if (grid[i][j].isJolly()) {
+                        } else if (cards[i][j].isJolly()) {
                             ANSIUtils.setForegroundColor(ANSIUtils.GREEN);
                         } else {
                             ANSIUtils.setForegroundColor(ANSIUtils.BRIGHT_YELLOW);
                         }
                         ANSIUtils.setBold();
                     }
-                    grid[i][j].print();
+                    cards[i][j].print();
                     ANSIUtils.reset();
                     System.out.print(" ");
                 } else {
@@ -276,12 +276,12 @@ public class Grid {
         System.out.print("    "); // initial space for row indices
         for (
 
-                int i = 0; i < grid[0].length * 4 + 1; i++) {
+                int i = 0; i < cards[0].length * 4 + 1; i++) {
             if (i == 0) {
                 System.out.print("└");
-            } else if (i < grid[0].length * 4 && i % 4 == 0) {
+            } else if (i < cards[0].length * 4 && i % 4 == 0) {
                 System.out.print("┴");
-            } else if (i == grid[0].length * 4) {
+            } else if (i == cards[0].length * 4) {
                 System.out.print("┘");
             } else {
                 System.out.print("─");

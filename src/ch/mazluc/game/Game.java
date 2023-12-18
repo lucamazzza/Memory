@@ -34,7 +34,7 @@ public class Game {
     /**
      * The console interaction util.
      */
-    private ConsoleInteractionUtils console;
+    private final ConsoleInteractionUtils console;
 
     /**
      * The random number generator.
@@ -79,13 +79,12 @@ public class Game {
      * Sorts the players list in ascending order by score.
      */
     private void sortPlayersByScore() {
-        Player[] players = this.players;
-        for (int i = 0; i < players.length - 1; i++) {
-            for (int j = 0; j < players.length - i - 1; j++) {
-                if (players[j].getScore() < players[j + 1].getScore()) {
-                    Player temp = players[j];
-                    players[j] = players[j + 1];
-                    players[j + 1] = temp;
+        for (int i = 0; i < this.players.length - 1; i++) {
+            for (int j = 0; j < this.players.length - i - 1; j++) {
+                if (this.players[j].getScore() < this.players[j + 1].getScore()) {
+                    Player temp = this.players[j];
+                    this.players[j] = this.players[j + 1];
+                    this.players[j + 1] = temp;
                 }
             }
         }
@@ -151,9 +150,9 @@ public class Game {
         ANSIUtils.setForegroundColor(ANSIUtils.BLUE);
         System.out.println("LEADERBOARD: ");
         ANSIUtils.reset();
-        for (int i = 0; i < players.length; i++) {
-            ANSIUtils.setBackgroundColor(players[i].getColor());
-            System.out.printf("%-15s %2d\n", players[i].getName(), players[i].getScore());
+        for (Player player : players) {
+            ANSIUtils.setBackgroundColor(player.getColor());
+            System.out.printf("%-15s %2d\n", player.getName(), player.getScore());
             ANSIUtils.reset();
         }
         this.console.readEnterToContinue();

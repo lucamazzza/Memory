@@ -189,6 +189,11 @@ public class ANSIUtils {
     public static final String REVERS_OFF = "\u001B[27m";
 
     /**
+     * ANSI Standard Escape Sequence
+     */
+    private static final String ESC = "\u001B[";
+
+    /**
      * Private constructor to prevent instantiation,
      * as the class is a utility class and its use is
      * only static.
@@ -237,7 +242,7 @@ public class ANSIUtils {
      */
     public static void moveTo(int row, int col) {
         if (row > 0 && col > 0) {
-            System.out.print("\u001b[" + row + ";" + col + "H");
+            System.out.print(ESC + row + ";" + col + "H");
         }
     }
 
@@ -251,7 +256,7 @@ public class ANSIUtils {
      */
     public static void setForegroundColor(int code) {
         if (isColorCodeValid(code)) {
-            System.out.print("\u001b[" + code + "m");
+            System.out.print(ESC + code + "m");
         }
     }
 
@@ -262,7 +267,7 @@ public class ANSIUtils {
      */
     public static void setBackgroundColor(int code) {
         if (isColorCodeValid(code)) {
-            System.out.print("\u001b[" + (code + 10) + "m");
+            System.out.print(ESC + (code + 10) + "m");
         }
     }
 
@@ -277,7 +282,7 @@ public class ANSIUtils {
      */
     public static void setColor(int bg, int fg) {
         if (isColorCodeValid(bg) && isColorCodeValid(fg)) {
-            System.out.print("\u001b[" + fg + ";" + (bg + 10) + "m");
+            System.out.print(ESC + fg + ";" + (bg + 10) + "m");
         }
     }
 

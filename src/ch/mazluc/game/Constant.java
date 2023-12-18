@@ -19,7 +19,16 @@ package ch.mazluc.game;
  * @author Luca Mazza
  * @version 1.0
  */
-public class Constant {
+public final class Constant {
+
+    /**
+     * Private constructor to prevent instantiation,
+     * as the class is a utility class and its use is
+     * only static.
+     */
+    private Constant() {
+        throw new IllegalStateException("Utility class");
+    }
 
     /**
      * The maximum number of cells in the grid.

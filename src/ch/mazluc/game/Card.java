@@ -3,8 +3,7 @@ package ch.mazluc.game;
 /**
  * <h1>
  * Card
- * </h1>
- * 
+ *
  * <p>
  * A card in a card game.
  * 
@@ -21,12 +20,12 @@ public class Card {
     /**
      * The symbol of the card.
      */
-    private char symbol;
+    private final char symbol;
 
     /**
      * The amount of points.
      */
-    private int points;
+    private final int points;
 
     /**
      * The case of the bomb card.
@@ -114,7 +113,7 @@ public class Card {
         if (this.jolly && card.jolly) {
             return true;
         }
-        return this.symbol == card.symbol && !(this == card);
+        return this.symbol == card.symbol && this != card;
     }
 
     /**
@@ -144,6 +143,7 @@ public class Card {
 
     /**
      * Flip the card to the specified side.
+     * @param state the state
      */
     public void flip(boolean state) {
         this.flipped = state;
@@ -181,7 +181,7 @@ public class Card {
      */
     public void print() {
         if (flipped) {
-            System.out.print(this.toString());
+            System.out.print(this.symbol);
         } else {
             System.out.print("!");
         }

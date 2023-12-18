@@ -32,7 +32,7 @@ public class ConsoleInteractionUtils {
     /**
      * The scanner used to read user input.
      */
-    private Scanner in;
+    private final Scanner in;
 
     /**
      * Creates a new instance of the `ConsoleInteractionUtils` class.
@@ -52,7 +52,7 @@ public class ConsoleInteractionUtils {
      */
     public int readInt(String msg) {
         System.out.print(msg + ": ");
-        int value = 0;
+        int value;
         while (!this.in.hasNextInt()) {
             this.in.nextLine();
             ANSIUtils.setForegroundColor(ANSIUtils.RED);
@@ -148,9 +148,9 @@ public class ConsoleInteractionUtils {
      * @return the grid size
      */
     public int[] readValidGridSize() {
-        int height = 0;
-        int width = 0;
-        boolean validGridSize = false;
+        int height;
+        int width;
+        boolean validGridSize;
         String message = """
                 Insert height and width of the grid such that:
                 - height > 1,

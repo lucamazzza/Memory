@@ -21,12 +21,12 @@ public class Coordinate {
     /**
      * The x coordinate.
      */
-    private int x;
+    private final int x;
 
     /**
      * The y coordinate.
      */
-    private int y;
+    private final int y;
 
     /**
      * Creates a new coordinate.

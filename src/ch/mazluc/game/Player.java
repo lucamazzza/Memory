@@ -20,7 +20,7 @@ public class Player {
     /**
      * The name of the player.
      */
-    private String name;
+    private final String name;
 
     /**
      * The score of the player.
@@ -35,7 +35,7 @@ public class Player {
     /**
      * The color of the player in the UI.
      */
-    private int color;
+    private final int color;
 
     /**
      * Constructor.
@@ -43,7 +43,9 @@ public class Player {
      * and the name must be at least 3 characters long
      * and maximum 15 characters long
      * 
-     * @param name
+     * @param name name of the player
+     *             must be at least 3 characters long and maximum 15 characters long
+     * @param color color of the player
      */
     public Player(String name, int color) {
         if (name.length() < 3 || name.length() > 15) {
