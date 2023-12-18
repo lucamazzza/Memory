@@ -181,12 +181,12 @@ public class ANSIUtils {
     /**
      * ANSI reverse on escape
      */
-    public static final String REVERSEON = "\u001B[7m";
+    public static final String REVERSE_ON = "\u001B[7m";
 
     /**
      * ANSI reverse off escape
      */
-    public static final String REVERSOFF = "\u001B[27m";
+    public static final String REVERS_OFF = "\u001B[27m";
 
     /**
      * Private constructor to prevent instantiation,

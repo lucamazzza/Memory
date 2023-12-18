@@ -9,6 +9,10 @@ package ch.mazluc.game;
  * Represents a coordinate on a 2D grid.
  * A coordinate is defined by its x and y components.
  * 
+ * <p>
+ * ⚠️ The coordinates are 1-based,
+ * so to use them on a 2D grid and translate to array coordinates.
+ * 
  * @author Luca Mazza
  * @version 1.0
  */
