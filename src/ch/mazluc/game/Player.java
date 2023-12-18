@@ -1,6 +1,5 @@
 package ch.mazluc.game;
 
-import java.util.Random;
 import java.util.UUID;
 
 /**
