@@ -1,10 +1,6 @@
 package ch.mazluc.game;
 
 /**
- * <h1>
- * Constant
- * </h1>
- * 
  * <p>
  * Constants used in the game.
  * 
@@ -25,38 +21,39 @@ public final class Constant {
      * Private constructor to prevent instantiation,
      * as the class is a utility class and its use is
      * only static.
+     * @throws IllegalStateException if called
      */
     private Constant() {
         throw new IllegalStateException("Utility class");
     }
 
     /**
-     * The maximum number of cells in the grid.
+     * The maximum number of cells in the grid ({@value})
      */
     public static final int MAX_CELLS = 186;
 
     /**
-     * The minimum number of players.
+     * The minimum number of players ({@value})
      */
     public static final int MIN_PLAYERS = 2;
 
     /**
-     * The maximum number of players.
+     * The maximum number of players ({@value})
      */
     public static final int MAX_PLAYERS = 6;
 
     /**
-     * The minimum length of a player name.
+     * The minimum length of a player name ({@value})
      */
     public static final int MIN_PLAYER_NAME_LENGTH = 3;
 
     /**
-     * The maximum length of a player name.
+     * The maximum length of a player name ({@value})
      */
     public static final int MAX_PLAYER_NAME_LENGTH = 15;
 
     /**
-     * The points for a jolly card.
+     * The points for a jolly card ({@value})
      */
     public static final int JOLLY_POINTS = 20;
 }

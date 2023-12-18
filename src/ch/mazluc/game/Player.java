@@ -3,10 +3,6 @@ package ch.mazluc.game;
 import java.util.UUID;
 
 /**
- * <h1>
- * Player
- * </h1>
- * 
  * <p>
  * A player in a card game.
  * A player has a name, collects a score during the game

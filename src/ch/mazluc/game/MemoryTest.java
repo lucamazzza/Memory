@@ -1,10 +1,6 @@
 package ch.mazluc.game;
 
 /**
- * <h1>
- * Memory Game
- * </h1>
- * 
  * <p>
  * Game execution.
  * 
@@ -43,6 +39,12 @@ package ch.mazluc.game;
  * @version 1.0
  */
 public class MemoryTest {
+
+    /**
+     * Executes the main function of the program.
+     *
+     * @param  args  the command line arguments
+     */
     public static void main(String[] args) {
         Game game = new Game();
         game.printStartScreen();

@@ -4,10 +4,6 @@ import java.util.Random;
 import java.util.regex.Pattern;
 
 /**
- * <h1>
- * Grid
- * </h1>
- *
  * <p>
  * A grid of cards.
  * 

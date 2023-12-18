@@ -24,10 +24,6 @@ package ch.mazluc.game;
  * SOFTWARE.
  */
 /**
- * <h1>
- * ANSIUtils
- * </h1>
- * 
  * <p>
  * Utility class for ANSI escape sequences. Implements methods for setting
  * background and foreground colors, moving the cursor, clearing the screen,
@@ -59,137 +55,137 @@ package ch.mazluc.game;
 public class ANSIUtils {
 
     /**
-     * ANSI black color code
+     * ANSI black color code ({@value})
      */
     public static final int BLACK = 30;
 
     /**
-     * ANSI red color code
+     * ANSI red color code ({@value})
      */
     public static final int RED = 31;
 
     /**
-     * ANSI green color code
+     * ANSI green color code ({@value})
      */
     public static final int GREEN = 32;
 
     /**
-     * ANSI yellow color code
+     * ANSI yellow color code ({@value})
      */
     public static final int YELLOW = 33;
 
     /**
-     * ANSI blue color code
+     * ANSI blue color code ({@value})
      */
     public static final int BLUE = 34;
 
     /**
-     * ANSI magenta color code
+     * ANSI magenta color code ({@value})
      */
     public static final int MAGENTA = 35;
 
     /**
-     * ANSI cyan color code
+     * ANSI cyan color code ({@value})
      */
     public static final int CYAN = 36;
 
     /**
-     * ANSI white color code
+     * ANSI white color code ({@value})
      */
     public static final int WHITE = 37;
 
     /**
-     * ANSI bright black color code
+     * ANSI bright black color code ({@value})
      */
     public static final int BRIGHT_BLACK = 90;
 
     /**
-     * ANSI bright red color code
+     * ANSI bright red color code ({@value})
      */
     public static final int BRIGHT_RED = 91;
 
     /**
-     * ANSI bright green color code
+     * ANSI bright green color code ({@value})
      */
     public static final int BRIGHT_GREEN = 92;
 
     /**
-     * ANSI bright yellow color code
+     * ANSI bright yellow color code ({@value})
      */
     public static final int BRIGHT_YELLOW = 93;
 
     /**
-     * ANSI bright blue color code
+     * ANSI bright blue color code ({@value})
      */
     public static final int BRIGHT_BLUE = 94;
 
     /**
-     * ANSI bright magenta color code
+     * ANSI bright magenta color code ({@value})
      */
     public static final int BRIGHT_MAGENTA = 95;
 
     /**
-     * ANSI bright cyan color code
+     * ANSI bright cyan color code ({@value})
      */
     public static final int BRIGHT_CYAN = 96;
 
     /**
-     * ANSI bright white color code
+     * ANSI bright white color code ({@value})
      */
     public static final int BRIGHT_WHITE = 97;
 
     /**
-     * ANSI reset escape
+     * ANSI reset escape ({@value})
      */
     public static final String RESET = "\u001B[0m";
 
     /**
-     * ANSI clear screen escape
+     * ANSI clear screen escape ({@value})
      */
     public static final String CLS = "\u001B[2J";
 
     /**
-     * ANSI backspace escape
+     * ANSI backspace escape ({@value})
      */
     public static final String BS = "\u001B[1D";
 
     /**
-     * ANSI delete escape
+     * ANSI delete escape ({@value})
      */
     public static final String DEL = "\u001B[1P";
 
     /**
-     * ANSI bell escape
+     * ANSI bell escape ({@value})
      */
     public static final String BEL = "\u0007";
 
     /**
-     * ANSI home escape
+     * ANSI home escape ({@value})
      */
     public static final String HOME = "\u001B[H";
 
     /**
-     * ANSI bold escape
+     * ANSI bold escape ({@value})
      */
     public static final String BOLD = "\u001B[1m";
 
     /**
-     * ANSI normal escape
+     * ANSI normal escape ({@value})
      */
     public static final String NORMAL = "\u001B[0m";
 
     /**
-     * ANSI reverse on escape
+     * ANSI reverse on escape ({@value})
      */
     public static final String REVERSE_ON = "\u001B[7m";
 
     /**
-     * ANSI reverse off escape
+     * ANSI reverse off escape ({@value})
      */
-    public static final String REVERS_OFF = "\u001B[27m";
+    public static final String REVERSE_OFF = "\u001B[27m";
 
     /**
-     * ANSI Standard Escape Sequence
+     * ANSI Standard Escape Sequence ({@value})
      */
     private static final String ESC = "\u001B[";
 
@@ -197,6 +193,8 @@ public class ANSIUtils {
      * Private constructor to prevent instantiation,
      * as the class is a utility class and its use is
      * only static.
+     * 
+     * @throws IllegalStateException if called
      */
     private ANSIUtils() {
         throw new IllegalStateException("Utility class");

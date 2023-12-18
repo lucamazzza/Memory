@@ -1,6 +1,0 @@
-
-t	java:S135Ç"YReduce the total number of break and continue statements in this loop to use at most one.(¯¸‚ıÿÿÿÿ
-t
-java:S3457›"Q%n should be used in place of \n to produce the platform-specific line separator.(ÅÃÙıùÿÿÿÿ8û”öÇ1
-i
-java:S3776Ä"RRefactor this method to reduce its Cognitive Complexity from 17 to the 15 allowed.(°€ÿÙ

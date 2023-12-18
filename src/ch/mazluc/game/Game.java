@@ -3,10 +3,6 @@ package ch.mazluc.game;
 import java.util.Random;
 
 /**
- * <h1>
- * Game
- * </h1>
- * 
  * <p>
  * Manages the game cycle.
  * 
@@ -274,7 +270,11 @@ public class Game {
             this.grid.flipAllCards();
         }
         ANSIUtils.clearScreen();
+        ANSIUtils.setForegroundColor(ANSIUtils.BLUE);
+        ANSIUtils.setBold();
         System.out.println("GAME OVER");
+        ANSIUtils.reset();
+        System.out.println();
         this.printLeaderboard();
     }
 

@@ -1,10 +1,6 @@
 package ch.mazluc.game;
 
 /**
- * <h1>
- * Coordinate
- * </h1>
- * 
  * <p>
  * Represents a coordinate on a 2D grid.
  * A coordinate is defined by its x and y components.

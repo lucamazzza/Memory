@@ -3,10 +3,6 @@ package ch.mazluc.game;
 import java.util.Scanner;
 
 /**
- * <h1>
- * ConsoleInteractionUtils
- * </h1>
- * 
  * <p>
  * Utility class for console interaction.
  * Reads and checks different kinds of user input using
@@ -110,6 +106,14 @@ public class ConsoleInteractionUtils {
         return value;
     }
 
+    /**
+     * Reads a string from user input with a minimum and maximum length.
+     *
+     * @param  msg         the message to display before prompting for input
+     * @param  minLength   the minimum length of the string
+     * @param  maxLength   the maximum length of the string
+     * @return             the string entered by the user
+     */
     public String readStringWithMinMaxLength(String msg, int minLength, int maxLength) {
         String value = "";
         boolean correctInput = false;

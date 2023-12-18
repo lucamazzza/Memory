@@ -1,9 +1,6 @@
 package ch.mazluc.game;
 
 /**
- * <h1>
- * Card
- *
  * <p>
  * A card in a card game.
  * 
