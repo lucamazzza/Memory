@@ -48,6 +48,10 @@ public class Grid {
      * @param cols column size of the grid
      */
     public Grid(int rows, int cols) {
+        if (rows <= 1 || cols <= 1) {
+            rows = 2;
+            cols = 2;
+        }
         this.cards = new Card[rows][cols];
     }
 
