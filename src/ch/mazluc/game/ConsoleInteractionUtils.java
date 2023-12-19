@@ -109,10 +109,10 @@ public class ConsoleInteractionUtils {
     /**
      * Reads a string from user input with a minimum and maximum length.
      *
-     * @param  msg         the message to display before prompting for input
-     * @param  minLength   the minimum length of the string
-     * @param  maxLength   the maximum length of the string
-     * @return             the string entered by the user
+     * @param msg       the message to display before prompting for input
+     * @param minLength the minimum length of the string
+     * @param maxLength the maximum length of the string
+     * @return the string entered by the user
      */
     public String readStringWithMinMaxLength(String msg, int minLength, int maxLength) {
         String value = "";

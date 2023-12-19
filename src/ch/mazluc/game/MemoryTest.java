@@ -28,11 +28,27 @@ package ch.mazluc.game;
  * 
  * <p>
  * <b>Extra features</b>:
- * There are two special cards:
+ * 
+ * <p>
+ * Special cards:
  * <ul>
  * <li>Bomb: when the user flips it, they are disqualified;
  * <li>Jolly: when the user flips it, they get 20 points without matching
  * any card;
+ * </ul>
+ * 
+ * <p>
+ * Random player names:
+ * <ul>
+ * <li>When defining players' names the user can generate random names (uuid
+ * based for now);
+ * </ul>
+ * 
+ * <p>
+ * Better graphical output:
+ * <ul>
+ * <li>The graphics use ANSI Escapes to refresh the screen and display a colored
+ * output;
  * </ul>
  * 
  * @author Luca Mazza

@@ -39,8 +39,9 @@ public class Player {
      * and the name must be at least 3 characters long
      * and maximum 15 characters long
      * 
-     * @param name name of the player
-     *             must be at least 3 characters long and maximum 15 characters long
+     * @param name  name of the player
+     *              must be at least 3 characters long and maximum 15 characters
+     *              long
      * @param color color of the player
      */
     public Player(String name, int color) {
@@ -49,8 +50,6 @@ public class Player {
         }
         this.name = name;
         this.color = color;
-        this.score = 0;
-        this.dead = false;
     }
 
     /**
