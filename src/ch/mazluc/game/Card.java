@@ -57,7 +57,6 @@ public class Card {
         }
         this.symbol = symbol;
         this.points = points;
-        this.flipped = false;
     }
 
     /**
@@ -140,6 +139,7 @@ public class Card {
 
     /**
      * Flip the card to the specified side.
+     * 
      * @param state the state
      */
     public void flip(boolean state) {

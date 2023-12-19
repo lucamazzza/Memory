@@ -43,7 +43,7 @@ public class MemoryTest {
     /**
      * Executes the main function of the program.
      *
-     * @param  args  the command line arguments
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
         Game game = new Game();
