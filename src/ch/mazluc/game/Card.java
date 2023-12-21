@@ -100,6 +100,9 @@ public class Card {
      * @return true if the cards are equal
      */
     public boolean equals(Card card) {
+        if (this == card) {
+            return true;
+        }
         if (card == null) {
             return false;
         }

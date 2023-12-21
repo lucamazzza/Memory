@@ -146,9 +146,15 @@ public class Game {
         ANSIUtils.setForegroundColor(ANSIUtils.BLUE);
         System.out.println("LEADERBOARD: ");
         ANSIUtils.reset();
-        for (Player player : players) {
-            ANSIUtils.setBackgroundColor(player.getColor());
-            System.out.printf("%-15s %2d\n", player.getName(), player.getScore());
+        ANSIUtils.setBackgroundColor(this.players[0].getColor());
+        System.out.printf("%-15s %2d", this.players[0].getName(), this.players[0].getScore());
+        ANSIUtils.reset();
+        ANSIUtils.setForegroundColor(ANSIUtils.YELLOW);
+        System.out.println(" ♛");
+        ANSIUtils.reset();
+        for (int i = 1; i < this.players.length; i++) {
+            ANSIUtils.setBackgroundColor(this.players[i].getColor());
+            System.out.printf("%-15s %2d\n", this.players[i].getName(), this.players[i].getScore());
             ANSIUtils.reset();
         }
         this.console.readEnterToContinue();
@@ -187,9 +193,8 @@ public class Game {
      * </ul>
      * When the grid is empty the game is over
      * 
-     * @throws InterruptedException when the game is interrupted
      */
-    public void start() throws InterruptedException {
+    public void start() {
         int currentPlayer = -1;
         boolean lastPlayerHasGuessed = false;
         while (!this.grid.isEmpty()) {
@@ -211,7 +216,7 @@ public class Game {
                 players[currentPlayer].kill();
                 System.out.println("BOOM!");
                 this.grid.popCard(guess1);
-                Thread.sleep(2000);
+                this.console.readEnterToContinue();
                 this.console.clearScanner();
                 this.grid.flipAllCards();
                 continue;
@@ -220,7 +225,7 @@ public class Game {
                 players[currentPlayer].incrementScore(guess1.getPoints());
                 System.out.println("JOLLY!");
                 this.grid.popCard(guess1);
-                Thread.sleep(2000);
+                this.console.readEnterToContinue();
                 this.console.clearScanner();
                 this.grid.flipAllCards();
                 lastPlayerHasGuessed = true;
@@ -236,7 +241,7 @@ public class Game {
                 players[currentPlayer].kill();
                 System.out.println("BOOM!");
                 this.grid.popCard(guess2);
-                Thread.sleep(2000);
+                this.console.readEnterToContinue();
                 this.console.clearScanner();
                 this.grid.flipAllCards();
                 continue;
@@ -245,7 +250,7 @@ public class Game {
                 players[currentPlayer].incrementScore(guess2.getPoints());
                 System.out.println("JOLLY!");
                 this.grid.popCard(guess2);
-                Thread.sleep(2000);
+                this.console.readEnterToContinue();
                 this.console.clearScanner();
                 this.grid.flipAllCards();
                 lastPlayerHasGuessed = true;
@@ -256,14 +261,14 @@ public class Game {
             // CASE MATCH OR WRONG
             if (guess1.equals(guess2)) {
                 System.out.println("MATCH!");
-                Thread.sleep(2000);
+                this.console.readEnterToContinue();
                 players[currentPlayer].incrementScore(guess1.getPoints());
                 this.grid.popCard(guess1);
                 this.grid.popCard(guess2);
                 lastPlayerHasGuessed = true;
             } else {
                 System.out.println("WRONG!");
-                Thread.sleep(2000);
+                this.console.readEnterToContinue();
             }
             // RESTORE GRID
             this.console.clearScanner();

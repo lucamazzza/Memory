@@ -65,12 +65,7 @@ public class MemoryTest {
         Game game = new Game();
         game.printStartScreen();
         game.initialize();
-        try {
-            game.start();
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        } finally {
-            game.destroy();
-        }
+        game.start();
+        game.destroy();
     }
 }
